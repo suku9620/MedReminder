@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:id="@+id/reminder_title"
             android:layout_marginLeft="72dp"
-            android:hint="Reminder"
+            android:hint="Medicine"
             android:textSize="25dp"
             android:lines="4"
             android:minLines="4"
@@ -72,6 +72,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:clickable="true"
+                android:onClick="setDate"
                 android:id="@+id/date"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_height="72dp">
@@ -114,7 +115,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:clickable="true"
-
+                android:onClick="setTime"
                 android:id="@+id/time"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_height="72dp">
@@ -202,7 +203,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="8dp"
-
+                    android:onClick="onSwitchRepeat"
                     android:checked="true"
                     android:textOn="On"
                     android:textOff="Off"/>
@@ -213,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/RepeatNo"
                 android:clickable="true"
-
+                android:onClick="setRepeatNo"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_height="72dp">
 
@@ -256,7 +257,7 @@
                 android:layout_width="match_parent"
                 android:id="@+id/RepeatType"
                 android:clickable="true"
-
+                android:onClick="selectRepeatType"
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_height="72dp">
 
@@ -312,7 +313,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-
+        android:onClick="selectFab1"
         fab:fab_icon="@drawable/ic_notifications_off_grey600_24dp"
         fab:fab_colorNormal="@color/colorAccent"
         fab:fab_colorPressed="@color/fab_pressed"
@@ -327,7 +328,7 @@
         android:layout_width="10dp"
         android:layout_height="21dp"
         android:layout_alignParentLeft="true"
-
+        android:onClick="selectFab2"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="168dp"

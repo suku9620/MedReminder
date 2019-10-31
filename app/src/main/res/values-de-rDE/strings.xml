@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Medizin-Erinnerung</string>
+    <string name="no_card_details">Klicken Sie auf die Schaltfläche unten, um mit der Erstellung Ihres Arzneimittels zu beginnen!</string>
+    <string name="title_activity_add_reminder">Medizin hinzufügen</string>
+    <string name="title_activity_edit_reminder">Medizin bearbeiten </string>
+    <string name="title_activity_licenses">Lizenzen</string>
+
+    <string name="add_reminder">Medizin</string>
+    <string name="details">Einzelheiten</string>
+    <string name="date">Datum</string>
+    <string name="time">Zeit</string>
+    <string name="repeat">Wiederholen</string>
+    <string name="repeat_off">aus</string>
+    <string name="repeat_no">Wiederholungsintervall </string>
+    <string name="repeat_type">Art der Wiederholungen</string>
+
+    <string name="action_discard_reminder">Medizin verwerfen</string>
+    <string name="action_save_reminder">Rette die Medizin</string>
+
+    <string name="editor_activity_title_new_reminder">Medikamentendetails hinzufügen</string>
+    <string name="editor_activity_title_edit_reminder">Medizin bearbeiten</string>
+    <string name="unsaved_changes_dialog_msg">Änderungen verwerfen und Bearbeitung beenden?</string>
+    <string name="discard">Verwerfen</string>
+
+    <string name="keep_editing">Bearbeiten Sie weiter</string>
+    <string name="delete_dialog_msg">Dieses Medikament löschen?</string>
+
+    <string name="delete">Löschen</string>
+
+    <string name="cancel">Stornieren</string>
+    <string name="editor_delete_reminder_successful">Medizin gelöscht</string>
+
+    <string name="editor_delete_reminder_failed">Fehler beim Löschen des Arzneimittels</string>
+
+    <string name="editor_insert_reminder_successful">Medizin gerettet</string>
+
+    <string name="editor_insert_reminder_failed">Fehler beim Speichern der Medizin</string>
+
+    <string name="editor_update_reminder_successful">Medizin aktualisiert </string>
+
+    <string name="editor_update_reminder_failed">Fehler beim Aktualisieren des Arzneimittels</string>
+
+    <string name="reminder_title">Medizin-Erinnerung</string>
+</resources>

@@ -40,8 +40,7 @@
                 android:layout_centerInParent="true"
                 android:padding="16dp"
                 android:gravity="center"
-                android:text="Click on the button below to begin creating your reminder!" />
-
+                android:text="@string/no_card_details"/>
         </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

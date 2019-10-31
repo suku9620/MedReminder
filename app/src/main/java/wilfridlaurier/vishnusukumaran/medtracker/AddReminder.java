@@ -12,6 +12,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,18 +28,22 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
+/*import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;*/
+
+
+import android.widget.DatePicker;
+
+import android.widget.TimePicker;
+
 
 import java.util.Calendar;
 
-import java.util.Calendar;
-import java.util.Calendar;
 import android.os.Bundle;
 
 public class AddReminder extends AppCompatActivity  {
@@ -152,33 +158,50 @@ public class AddReminder extends AppCompatActivity  {
         getSupportActionBar().setHomeButtonEnabled(true);
 
     }
+    Calendar now = Calendar.getInstance();
     // On clicking Time picker
-    public void setTime(View v){
-        Calendar now = Calendar.getInstance();
-        TimePickerDialog tpd = TimePickerDialog.newInstance(
-                (TimePickerDialog.OnTimeSetListener) this,
+    public void setTime(View v) {
+
+        TimePickerDialog.OnTimeSetListener mTimeListener =
+                new TimePickerDialog.OnTimeSetListener() {
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        now.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        now.set(Calendar.MINUTE, minute);
+
+                    }
+
+
+                };
+
+
+        new TimePickerDialog(AddReminder.this, mTimeListener,
                 now.get(Calendar.HOUR_OF_DAY),
-                now.get(Calendar.MINUTE),
-                false
-        );
-        tpd.setThemeDark(false);
-        tpd.show(getFragmentManager(), "Timepickerdialog");
+                now.get(Calendar.MINUTE), true).show();
 
     }
     // On clicking Date picker
-    public void setDate(View v){
-        Calendar now = Calendar.getInstance();
-        DatePickerDialog dpd = DatePickerDialog.newInstance(
-                (DatePickerDialog.OnDateSetListener) this,
+    public  void setDate(View v){
+
+        DatePickerDialog.OnDateSetListener mDateListener = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                now.set(Calendar.YEAR, year);
+                now.set(Calendar.MONTH, monthOfYear);
+                now.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            }
+        };
+
+
+        new DatePickerDialog(AddReminder.this, mDateListener,
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH)
-        );
-        dpd.show(getFragmentManager(), "Datepickerdialog");
+                now.get(Calendar.DAY_OF_MONTH)).show();
+
+
+
     }
     // Obtain time from time picker
-
-    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+    public  void onTimeSet(TimePickerDialog view, int hourOfDay, int minute) {
         mHour = hourOfDay;
         mMinute = minute;
         if (minute < 10) {
