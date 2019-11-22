@@ -34,7 +34,7 @@
         </activity>
         <provider
             android:name=".MedReminderProvider"
-            android:authorities="com.delaroystudios.alarmreminder"
+            android:authorities="wilfridlaurier.vishnusukumaran.medtracker"
             android:exported="false" />
 
         <service

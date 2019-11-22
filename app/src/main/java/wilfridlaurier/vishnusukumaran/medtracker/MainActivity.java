@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.content.Intent;
 import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import android.app.LoaderManager;
-import android.app.ProgressDialog;
-import android.content.ContentUris;
-import android.content.CursorLoader;
+import androidx.loader.app.LoaderManager;
 
-import android.content.Loader;
+import android.content.ContentUris;
+
+import androidx.loader.content.Loader;
+import androidx.loader.content.CursorLoader;
+import androidx.appcompat.widget.*;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -24,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     MedCursorAdapter mCursorAdapter;
     MedReminderDbHelper alarmReminderDbHelper = new MedReminderDbHelper(this);
     ListView reminderListView;
-    ProgressDialog prgDialog;
+
 
     private static final int VEHICLE_LOADER = 0;
 
@@ -71,8 +74,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(intent);
             }
         });
+        LoaderManager.getInstance(this).initLoader(VEHICLE_LOADER, null, this).forceLoad();
+       // getSupportLoaderManager().initLoader(VEHICLE_LOADER, null, this);
 
-        getLoaderManager().initLoader(VEHICLE_LOADER, null, this);
 
 
     }

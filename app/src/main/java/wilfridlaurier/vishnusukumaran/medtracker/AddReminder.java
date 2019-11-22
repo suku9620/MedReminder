@@ -2,17 +2,19 @@ package wilfridlaurier.vishnusukumaran.medtracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
-import android.app.LoaderManager;
+
 import android.content.ContentValues;
-import android.content.CursorLoader;
+
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.Loader;
+
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
+import androidx.loader.content.CursorLoader;
+
 import androidx.core.app.NavUtils;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
@@ -109,8 +111,8 @@ public class AddReminder extends AppCompatActivity implements
 
             setTitle(getString(R.string.editor_activity_title_edit_reminder));
 
-
-            getLoaderManager().initLoader(EXISTING_VEHICLE_LOADER, null, this);
+            LoaderManager.getInstance(this).initLoader(EXISTING_VEHICLE_LOADER, null, this).forceLoad();
+            //getSupportLoaderManager().initLoader(EXISTING_VEHICLE_LOADER, null, this);
         }
 
 
@@ -235,9 +237,21 @@ public class AddReminder extends AppCompatActivity implements
                 false
         );
         tpd.setThemeDark(false);
-       // tpd.show(getFragmentManager(), "Timepickerdialog");
+       tpd.show(getSupportFragmentManager(), "Timepickerdialog");
     }
 
+
+    @Override
+    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
+        mHour = hourOfDay;
+        mMinute = minute;
+        if (minute < 10) {
+            mTime = hourOfDay + ":" + "0" + minute;
+        } else {
+            mTime = hourOfDay + ":" + minute;
+        }
+        mTimeText.setText(mTime);
+    }
     // On clicking Date picker
     public void setDate(View v){
         Calendar now = Calendar.getInstance();
@@ -247,7 +261,8 @@ public class AddReminder extends AppCompatActivity implements
                 now.get(Calendar.MONTH),
                 now.get(Calendar.DAY_OF_MONTH)
         );
-       // dpd.show(getFragmentManager(), "Datepickerdialog");
+      // dpd.show(getSupportFragmentManager(), "Datepickerdialog");
+        dpd.show(this.getSupportFragmentManager(),"Datepickerdialog");
     }
 
 
@@ -685,15 +700,5 @@ public class AddReminder extends AppCompatActivity implements
     }
 
 
-    @Override
-    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        mHour = hourOfDay;
-        mMinute = minute;
-        if (minute < 10) {
-            mTime = hourOfDay + ":" + "0" + minute;
-        } else {
-            mTime = hourOfDay + ":" + minute;
-        }
-        mTimeText.setText(mTime);
-    }
+
 }
