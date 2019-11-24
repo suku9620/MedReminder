@@ -13,7 +13,8 @@
     <string name="repeat_off">Off</string>
     <string name="repeat_no">Repetition Interval </string>
     <string name="repeat_type">Type of Repetitions</string>
-
+    <string name="about">About</string>
+    <string name="about_msg">Version 1.0 Vishnu Sukumaran</string>
     <string name="action_discard_reminder">Discard Medicine</string>
     <string name="action_save_reminder">Save Medicine</string>
 

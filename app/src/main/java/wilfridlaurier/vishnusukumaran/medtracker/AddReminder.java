@@ -33,6 +33,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import java.util.Calendar;
 import android.widget.Toast;
+import com.google.android.material.snackbar.Snackbar;
+
+import static com.google.android.material.snackbar.Snackbar.*;
 
 
 public class AddReminder extends AppCompatActivity implements
@@ -95,11 +98,12 @@ public class AddReminder extends AppCompatActivity implements
 
         if (mCurrentReminderUri == null) {
 
-            setTitle(getString(R.string.editor_activity_title_new_reminder));
+            setTitle(R.string.editor_activity_title_new_reminder);
             invalidateOptionsMenu();
         } else {
 
-            setTitle(getString(R.string.editor_activity_title_edit_reminder));
+
+            setTitle(R.string.editor_activity_title_new_reminder);
             LoaderManager.getInstance(this).initLoader(EXISTING_LOADER, null, this).forceLoad();
 
         }
@@ -123,15 +127,15 @@ public class AddReminder extends AppCompatActivity implements
         mRepeatNo = Integer.toString(1);
         mRepeatType = "Hour";
 
-        mCalendar = Calendar.getInstance();
-        mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
-        mMinute = mCalendar.get(Calendar.MINUTE);
-        mYear = mCalendar.get(Calendar.YEAR);
-        mMonth = mCalendar.get(Calendar.MONTH) + 1;
-        mDay = mCalendar.get(Calendar.DATE);
+            mCalendar = Calendar.getInstance();
+            mHour = mCalendar.get(Calendar.HOUR_OF_DAY);
+            mMinute = mCalendar.get(Calendar.MINUTE);
+            mYear = mCalendar.get(Calendar.YEAR);
+            mMonth = mCalendar.get(Calendar.MONTH) + 1;
+            mDay = mCalendar.get(Calendar.DATE);
 
-        mDate = mDay + "/" + mMonth + "/" + mYear;
-        mTime = mHour + ":" + mMinute;
+            mDate = mDay + "/" + mMonth + "/" + mYear;
+            mTime = mHour + ":" + mMinute;
 
         // Setup Reminder Title EditText
         mTitleText.addTextChangedListener(new TextWatcher() {
@@ -143,6 +147,8 @@ public class AddReminder extends AppCompatActivity implements
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 mTitle = s.toString().trim();
                 mTitleText.setError(null);
+
+
             }
 
             @Override
@@ -196,9 +202,16 @@ public class AddReminder extends AppCompatActivity implements
         }
 
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle(R.string.title_activity_add_reminder);
+        if(mCurrentReminderUri==null)
+        {
+            getSupportActionBar().setTitle(R.string.editor_activity_title_new_reminder);
+        }
+        else
+        {
+            getSupportActionBar().setTitle(R.string.editor_activity_title_edit_reminder);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+       getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -386,7 +399,11 @@ public class AddReminder extends AppCompatActivity implements
 
 
                 if (mTitleText.getText().toString().length() == 0){
-                    mTitleText.setError("Reminder Title cannot be blank!");
+
+                    Snackbar.make(findViewById(R.id.toolbar), "Reminder title cannot be blank!",
+                            Snackbar.LENGTH_SHORT)
+                            .show();
+
                 }
 
                 else {
@@ -400,6 +417,9 @@ public class AddReminder extends AppCompatActivity implements
                 showDeleteConfirmationDialog();
                 return true;
             // Respond to a click on the "Up" arrow button in the app bar
+            case R.id.about:
+                Toast.makeText(this, R.string.about_msg, Toast.LENGTH_SHORT).show();
+                return true;
             case android.R.id.home:
                 // If the reminder hasn't changed, continue with navigating up to parent activity
                 // which is the {@link MainActivity}.
@@ -485,10 +505,10 @@ public class AddReminder extends AppCompatActivity implements
     // On clicking the save button
     public void saveReminder(){
 
-      if (mCurrentReminderUri == null ) {
+      /*if (mCurrentReminderUri == null ) {
             // Since no fields were modified, we can return early without creating a new reminder.
             return;
-        }
+        }*/
         ContentValues values = new ContentValues();
         values.put(MedReminderContract.AlarmReminderEntry.KEY_TITLE, mTitle);
         values.put(MedReminderContract.AlarmReminderEntry.KEY_DATE, mDate);
@@ -553,6 +573,9 @@ public class AddReminder extends AppCompatActivity implements
 
             Toast.makeText(this, "Alarm time is " + selectedTimestamp,
                     Toast.LENGTH_LONG).show();
+
+
+
         }
         Toast.makeText(getApplicationContext(), "Saved",
                 Toast.LENGTH_SHORT).show();

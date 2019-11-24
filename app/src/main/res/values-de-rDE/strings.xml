@@ -13,7 +13,9 @@
     <string name="repeat_off">aus</string>
     <string name="repeat_no">Wiederholungsintervall </string>
     <string name="repeat_type">Art der Wiederholungen</string>
+    <string name="about_msg">Version 1.0 Vishnu Sukumaran</string>
 
+    <string name="about">Über</string>
     <string name="action_discard_reminder">Medizin verwerfen</string>
     <string name="action_save_reminder">Rette die Medizin</string>
 

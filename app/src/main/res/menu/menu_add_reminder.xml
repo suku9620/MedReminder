@@ -9,4 +9,10 @@
         android:icon="@drawable/ic_check_white_24dp"
         android:title="@string/action_save_reminder"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="104"
+        android:title="@string/about"
+        app:showAsAction="never"
+        />
 </menu>

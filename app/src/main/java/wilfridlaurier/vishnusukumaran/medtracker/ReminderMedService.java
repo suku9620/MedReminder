@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.util.Log;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 
@@ -65,6 +67,8 @@ public class ReminderMedService extends IntentService {
                 .setAutoCancel(true)
                 .build();
 
-        manager.notify(NOTIFICATION_ID, note);
+            manager.notify(NOTIFICATION_ID, note);
+
+
     }
 }
