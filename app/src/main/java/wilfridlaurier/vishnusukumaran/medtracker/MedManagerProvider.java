@@ -10,7 +10,7 @@ public class MedManagerProvider {
         }
         sAlarmManager = alarmManager;
     }
-    /*package*/ static synchronized AlarmManager getAlarmManager(Context context) {
+   static synchronized AlarmManager getAlarmManager(Context context) {
         if (sAlarmManager == null) {
             sAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         }

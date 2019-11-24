@@ -1,25 +1,23 @@
-package wilfridlaurier.vishnusukumaran.medtracker;
 
+// MedTracker project
+// Author: Vishnu Sukumaran - Wilfrid Laurier University
+// Add Medicine Reminder form
+package wilfridlaurier.vishnusukumaran.medtracker;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
-
 import android.content.ContentValues;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.loader.content.CursorLoader;
-
 import androidx.core.app.NavUtils;
 import androidx.appcompat.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputType;
-
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,23 +27,20 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
-import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
-import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
-
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import java.util.Calendar;
 import android.widget.Toast;
 
 
 public class AddReminder extends AppCompatActivity implements
-        TimePickerDialog.OnTimeSetListener,
-        DatePickerDialog.OnDateSetListener, LoaderManager.LoaderCallbacks<Cursor>  {
+         LoaderManager.LoaderCallbacks<Cursor>  {
 
     //Initialize
 
-    private static final int EXISTING_VEHICLE_LOADER = 0;
-
-
+    private static final int EXISTING_LOADER = 0;
     private Toolbar mToolbar;
     private EditText mTitleText;
     private TextView mDateText, mTimeText, mRepeatText, mRepeatNoText, mRepeatTypeText;
@@ -62,11 +57,10 @@ public class AddReminder extends AppCompatActivity implements
     private String mRepeatNo;
     private String mRepeatType;
     private String mActive;
-
     private Uri mCurrentReminderUri;
     private boolean mVehicleHasChanged = false;
 
-    // Values for orientation change
+    // Values - in case the phone orientation changes
     private static final String KEY_TITLE = "title_key";
     private static final String KEY_TIME = "time_key";
     private static final String KEY_DATE = "date_key";
@@ -76,7 +70,6 @@ public class AddReminder extends AppCompatActivity implements
     private static final String KEY_ACTIVE = "active_key";
 
 
-    // Constant values in milliseconds
     private static final long milMinute = 60000L;
     private static final long milHour = 3600000L;
     private static final long milDay = 86400000L;
@@ -103,16 +96,12 @@ public class AddReminder extends AppCompatActivity implements
         if (mCurrentReminderUri == null) {
 
             setTitle(getString(R.string.editor_activity_title_new_reminder));
-
-            // Invalidate the options menu, so the "Delete" menu option can be hidden.
-            // (It doesn't make sense to delete a reminder that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
 
             setTitle(getString(R.string.editor_activity_title_edit_reminder));
+            LoaderManager.getInstance(this).initLoader(EXISTING_LOADER, null, this).forceLoad();
 
-            LoaderManager.getInstance(this).initLoader(EXISTING_VEHICLE_LOADER, null, this).forceLoad();
-            //getSupportLoaderManager().initLoader(EXISTING_VEHICLE_LOADER, null, this);
         }
 
 
@@ -210,8 +199,6 @@ public class AddReminder extends AppCompatActivity implements
         getSupportActionBar().setTitle(R.string.title_activity_add_reminder);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
-
     }
 
     @Override
@@ -226,65 +213,71 @@ public class AddReminder extends AppCompatActivity implements
         outState.putCharSequence(KEY_REPEAT_TYPE, mRepeatTypeText.getText());
         outState.putCharSequence(KEY_ACTIVE, mActive);
     }
-
+    Calendar now = Calendar.getInstance();
     // On clicking Time picker
     public void setTime(View v){
-        Calendar now = Calendar.getInstance();
-        TimePickerDialog tpd = TimePickerDialog.newInstance(
-                this,
+
+
+        TimePickerDialog.OnTimeSetListener mTimeListener =
+                new TimePickerDialog.OnTimeSetListener() {
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        now.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        now.set(Calendar.MINUTE, minute);
+                        mHour = hourOfDay;
+                        mMinute = minute;
+                        if (minute< 10) {
+                            mTime = hourOfDay + ":" + "0" + minute;
+                        } else {
+                            mTime = hourOfDay+ ":" + minute;
+                        }
+                        mTimeText.setText(mTime);
+
+                    }
+
+
+                };
+
+
+        new TimePickerDialog(AddReminder.this, mTimeListener,
                 now.get(Calendar.HOUR_OF_DAY),
-                now.get(Calendar.MINUTE),
-                false
-        );
-        tpd.setThemeDark(false);
-       tpd.show(getSupportFragmentManager(), "Timepickerdialog");
-    }
+                now.get(Calendar.MINUTE), true).show();
 
 
-    @Override
-    public void onTimeSet(TimePickerDialog view, int hourOfDay, int minute, int second) {
-        mHour = hourOfDay;
-        mMinute = minute;
-        if (minute < 10) {
-            mTime = hourOfDay + ":" + "0" + minute;
-        } else {
-            mTime = hourOfDay + ":" + minute;
-        }
-        mTimeText.setText(mTime);
     }
+
     // On clicking Date picker
     public void setDate(View v){
-        Calendar now = Calendar.getInstance();
-        DatePickerDialog dpd = DatePickerDialog.newInstance(
-                this,
+
+        DatePickerDialog.OnDateSetListener mDateListener = new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                now.set(Calendar.YEAR, year);
+                now.set(Calendar.MONTH, monthOfYear);
+                now.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                monthOfYear ++;
+                mDay = dayOfMonth;
+                mMonth = monthOfYear;
+                mYear = year;
+                mDate = dayOfMonth + "/" + monthOfYear + "/" + year;
+                mDateText.setText(mDate);
+            }
+        };
+
+
+        new DatePickerDialog(AddReminder.this, mDateListener,
                 now.get(Calendar.YEAR),
                 now.get(Calendar.MONTH),
-                now.get(Calendar.DAY_OF_MONTH)
-        );
-      // dpd.show(getSupportFragmentManager(), "Datepickerdialog");
-        dpd.show(this.getSupportFragmentManager(),"Datepickerdialog");
+                now.get(Calendar.DAY_OF_MONTH)).show();
+
+
     }
 
-
-
-    // Obtain date from date picker
-    @Override
-    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-        monthOfYear ++;
-        mDay = dayOfMonth;
-        mMonth = monthOfYear;
-        mYear = year;
-        mDate = dayOfMonth + "/" + monthOfYear + "/" + year;
-        mDateText.setText(mDate);
-    }
 
     // On clicking the active button
     public void selectFab1(View v) {
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
-       // mFAB1.setVisibility(View.GONE);
         mFAB1.hide();
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
-     //   mFAB2.setVisibility(View.VISIBLE);
         mFAB2.show();
         mActive = "true";
     }
@@ -292,10 +285,8 @@ public class AddReminder extends AppCompatActivity implements
     // On clicking the inactive button
     public void selectFab2(View v) {
         mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
-       // mFAB2.setVisibility(View.GONE);
         mFAB2.hide();
         mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
-        //mFAB1.setVisibility(View.VISIBLE);
         mFAB1.show();
         mActive = "false";
     }
@@ -350,7 +341,6 @@ public class AddReminder extends AppCompatActivity implements
         alert.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
                         if (input.getText().toString().length() == 0) {
                             mRepeatNo = Integer.toString(1);
                             mRepeatNoText.setText(mRepeatNo);
@@ -373,16 +363,10 @@ public class AddReminder extends AppCompatActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_editor.xml file.
-        // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_add_reminder, menu);
         return true;
     }
 
-    /**
-     * This method is called after invalidateOptionsMenu(), so that the
-     * menu can be updated (some menu items can be hidden or made visible).
-     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -396,8 +380,6 @@ public class AddReminder extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             // Respond to a click on the "Save" menu option
             case R.id.save_reminder:
@@ -425,10 +407,6 @@ public class AddReminder extends AppCompatActivity implements
                     NavUtils.navigateUpFromSameTask(AddReminder.this);
                     return true;
                 }
-
-                // Otherwise if there are unsaved changes, setup a dialog to warn the user.
-                // Create a click listener to handle the user confirming that
-                // changes should be discarded.
                 DialogInterface.OnClickListener discardButtonClickListener =
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -448,15 +426,11 @@ public class AddReminder extends AppCompatActivity implements
 
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
-        // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.unsaved_changes_dialog_msg);
         builder.setPositiveButton(R.string.discard, discardButtonClickListener);
         builder.setNegativeButton(R.string.keep_editing, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked the "Keep editing" button, so dismiss the dialog
-                // and continue editing the reminder.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -469,20 +443,15 @@ public class AddReminder extends AppCompatActivity implements
     }
 
     private void showDeleteConfirmationDialog() {
-        // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked the "Delete" button, so delete the reminder.
                 deleteReminder();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked the "Cancel" button, so dismiss the dialog
-                // and continue editing the reminder.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -495,14 +464,9 @@ public class AddReminder extends AppCompatActivity implements
     }
 
     private void deleteReminder() {
-        // Only perform the delete if this is an existing reminder.
         if (mCurrentReminderUri != null) {
-            // Call the ContentResolver to delete the reminder at the given content URI.
-            // Pass in null for the selection and selection args because the mCurrentreminderUri
-            // content URI already identifies the reminder that we want.
             int rowsDeleted = getContentResolver().delete(mCurrentReminderUri, null, null);
 
-            // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
                 // If no rows were deleted, then there was an error with the delete.
                 Toast.makeText(this, getString(R.string.editor_delete_reminder_failed),
@@ -521,15 +485,11 @@ public class AddReminder extends AppCompatActivity implements
     // On clicking the save button
     public void saveReminder(){
 
-     /*   if (mCurrentReminderUri == null ) {
+      if (mCurrentReminderUri == null ) {
             // Since no fields were modified, we can return early without creating a new reminder.
-            // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
         }
-*/
-
         ContentValues values = new ContentValues();
-
         values.put(MedReminderContract.AlarmReminderEntry.KEY_TITLE, mTitle);
         values.put(MedReminderContract.AlarmReminderEntry.KEY_DATE, mDate);
         values.put(MedReminderContract.AlarmReminderEntry.KEY_TIME, mTime);
@@ -563,31 +523,21 @@ public class AddReminder extends AppCompatActivity implements
         }
 
         if (mCurrentReminderUri == null) {
-            // This is a NEW reminder, so insert a new reminder into the provider,
-            // returning the content URI for the new reminder.
             Uri newUri = getContentResolver().insert(MedReminderContract.AlarmReminderEntry.CONTENT_URI, values);
-
-            // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
-                // If the new content URI is null, then there was an error with insertion.
                 Toast.makeText(this, getString(R.string.editor_insert_reminder_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
-                // Otherwise, the insertion was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_insert_reminder_successful),
                         Toast.LENGTH_SHORT).show();
             }
         } else {
 
             int rowsAffected = getContentResolver().update(mCurrentReminderUri, values, null, null);
-
-            // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
-                // If no rows were affected, then there was an error with the update.
                 Toast.makeText(this, getString(R.string.editor_update_reminder_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
-                // Otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_reminder_successful),
                         Toast.LENGTH_SHORT).show();
             }
@@ -604,8 +554,6 @@ public class AddReminder extends AppCompatActivity implements
             Toast.makeText(this, "Alarm time is " + selectedTimestamp,
                     Toast.LENGTH_LONG).show();
         }
-
-        // Create toast to confirm new reminder
         Toast.makeText(getApplicationContext(), "Saved",
                 Toast.LENGTH_SHORT).show();
 
@@ -649,9 +597,6 @@ public class AddReminder extends AppCompatActivity implements
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
-
-        // Proceed with moving to the first row of the cursor and reading data from it
-        // (This should be the only row in the cursor)
         if (cursor.moveToFirst()) {
             int titleColumnIndex = cursor.getColumnIndex(MedReminderContract.AlarmReminderEntry.KEY_TITLE);
             int dateColumnIndex = cursor.getColumnIndex(MedReminderContract.AlarmReminderEntry.KEY_DATE);

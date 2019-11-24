@@ -13,15 +13,12 @@ public class MedScheduler {
                 ReminderMedService.getReminderPendingIntent(context, reminderTask);
 
 
-        if (Build.VERSION.SDK_INT >= 23) {
+        if (Build.VERSION.SDK_INT >= 28) {
 
             manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, operation);
+            manager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTime,operation),operation);
 
-        } else if (Build.VERSION.SDK_INT >= 19) {
-
-            manager.setExact(AlarmManager.RTC_WAKEUP, alarmTime, operation);
-
-        } else {
+        }  else {
 
             manager.set(AlarmManager.RTC_WAKEUP, alarmTime, operation);
 
