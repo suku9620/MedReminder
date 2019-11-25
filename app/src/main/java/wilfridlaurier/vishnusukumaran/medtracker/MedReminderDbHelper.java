@@ -15,7 +15,7 @@ public class MedReminderDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        // Create a String that contains the SQL statement to create the reminder table
+
         String SQL_CREATE_ALARM_TABLE =  "CREATE TABLE " + MedReminderContract.AlarmReminderEntry.TABLE_NAME + " ("
                 + MedReminderContract.AlarmReminderEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MedReminderContract.AlarmReminderEntry.KEY_TITLE + " TEXT NOT NULL, "
@@ -26,7 +26,7 @@ public class MedReminderDbHelper extends SQLiteOpenHelper {
                 + MedReminderContract.AlarmReminderEntry.KEY_REPEAT_TYPE + " TEXT NOT NULL, "
                 + MedReminderContract.AlarmReminderEntry.KEY_ACTIVE + " TEXT NOT NULL " + " );";
 
-        // Execute the SQL statement
+
         sqLiteDatabase.execSQL(SQL_CREATE_ALARM_TABLE);
 
 

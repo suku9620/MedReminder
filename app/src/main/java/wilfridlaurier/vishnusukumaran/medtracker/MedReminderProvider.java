@@ -43,8 +43,6 @@ public class MedReminderProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
                         String sortOrder) {
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
-
-        // This cursor will hold the result of the query
         Cursor cursor = null;
 
         int match = sUriMatcher.match(uri);

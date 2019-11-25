@@ -4,7 +4,6 @@
 // Add Medicine Reminder form
 
 package wilfridlaurier.vishnusukumaran.medtracker;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.os.Bundle;
@@ -52,19 +51,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         reminderListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-
                 Intent intent = new Intent(MainActivity.this, AddReminder.class);
-
                 Uri currentVehicleUri = ContentUris.withAppendedId(MedReminderContract.AlarmReminderEntry.CONTENT_URI, id);
-
-                // Set the URI on the data field of the intent
                 intent.setData(currentVehicleUri);
-
                 startActivity(intent);
 
             }
         });
-
 
         mAddReminderButton = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -76,8 +69,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
         LoaderManager.getInstance(this).initLoader(LOADER, null, this).forceLoad();
-
-
 
 
     }
@@ -96,12 +87,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         };
 
-        return new CursorLoader(this,   // Parent activity context
-                MedReminderContract.AlarmReminderEntry.CONTENT_URI,   // Provider content URI to query
-                projection,             // Columns to include in the resulting Cursor
-                null,                   // No selection clause
-                null,                   // No selection arguments
-                null);                  // Default sort order
+        return new CursorLoader(this,
+                MedReminderContract.AlarmReminderEntry.CONTENT_URI,
+                projection,
+                null,
+                null,
+                null);
 
     }
 

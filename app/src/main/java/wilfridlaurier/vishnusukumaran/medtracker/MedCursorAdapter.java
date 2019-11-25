@@ -18,7 +18,7 @@ public class MedCursorAdapter extends CursorAdapter {
     private TextDrawable mDrawableBuilder;
 
     public MedCursorAdapter(Context context, Cursor c) {
-        super(context, c, 0 /* flags */);
+        super(context, c, 0 );
     }
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -28,11 +28,11 @@ public class MedCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        mTitleText = (TextView) view.findViewById(R.id.recycle_title);
-        mDateAndTimeText = (TextView) view.findViewById(R.id.recycle_date_time);
-        mRepeatInfoText = (TextView) view.findViewById(R.id.recycle_repeat_info);
-        mActiveImage = (ImageView) view.findViewById(R.id.active_image);
-        mThumbnailImage = (ImageView) view.findViewById(R.id.thumbnail_image);
+        mTitleText =  view.findViewById(R.id.recycle_title);
+        mDateAndTimeText =  view.findViewById(R.id.recycle_date_time);
+        mRepeatInfoText =  view.findViewById(R.id.recycle_repeat_info);
+        mActiveImage =  view.findViewById(R.id.active_image);
+        mThumbnailImage =  view.findViewById(R.id.thumbnail_image);
 
         int titleColumnIndex = cursor.getColumnIndex(MedReminderContract.AlarmReminderEntry.KEY_TITLE);
         int dateColumnIndex = cursor.getColumnIndex(MedReminderContract.AlarmReminderEntry.KEY_DATE);
@@ -63,7 +63,7 @@ public class MedCursorAdapter extends CursorAdapter {
 
     }
 
-    // Set reminder title view
+
     public void setReminderTitle(String title) {
         mTitleText.setText(title);
         String letter = "A";
@@ -74,18 +74,18 @@ public class MedCursorAdapter extends CursorAdapter {
 
         int color = mColorGenerator.getRandomColor();
 
-        // Create a circular icon consisting of  a random background colour and first letter of title
+
         mDrawableBuilder = TextDrawable.builder()
                 .buildRound(letter, color);
         mThumbnailImage.setImageDrawable(mDrawableBuilder);
     }
 
-    // Set date and time views
+
     public void setReminderDateTime(String datetime) {
         mDateAndTimeText.setText(datetime);
     }
 
-    // Set repeat views
+
     public void setReminderRepeatInfo(String repeat, String repeatNo, String repeatType) {
         if(repeat.equals("true")){
             mRepeatInfoText.setText("Every " + repeatNo + " " + repeatType + "(s)");
@@ -94,7 +94,7 @@ public class MedCursorAdapter extends CursorAdapter {
         }
     }
 
-    // Set active image as on or off
+
     public void setActiveImage(String active){
         if(active.equals("true")){
             mActiveImage.setImageResource(R.drawable.ic_notifications_on_white_24dp);
