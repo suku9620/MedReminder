@@ -34,6 +34,7 @@ import android.app.TimePickerDialog;
 import java.util.Calendar;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
+import java.text.DateFormat;
 
 import static com.google.android.material.snackbar.Snackbar.*;
 
@@ -571,7 +572,7 @@ public class AddReminder extends AppCompatActivity implements
                 new MedScheduler().setAlarm(getApplicationContext(), selectedTimestamp, mCurrentReminderUri);
             }
 
-            Toast.makeText(this, "Alarm time is " + selectedTimestamp,
+            Toast.makeText(this, "Alarm time is " + DateFormat.getTimeInstance(DateFormat.SHORT).format(mCalendar.getTime()),
                     Toast.LENGTH_LONG).show();
 
 

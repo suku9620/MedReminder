@@ -32,14 +32,10 @@
                 android:value=".MainActivity"
                 />
         </activity>
-        <provider
-            android:name=".MedReminderProvider"
-            android:authorities="wilfridlaurier.vishnusukumaran.medtracker"
+        <provider android:name=".MedReminderProvider" android:authorities="wilfridlaurier.vishnusukumaran.medtracker"
             android:exported="false" />
 
-        <service
-            android:name=".ReminderMedService"
-            android:exported="false" />
+        <service android:name=".ReminderMedService" android:exported="false" ></service>
 
 
     </application>

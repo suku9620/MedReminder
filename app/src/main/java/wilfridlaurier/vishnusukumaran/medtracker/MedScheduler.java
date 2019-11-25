@@ -16,7 +16,7 @@ public class MedScheduler {
         if (Build.VERSION.SDK_INT >= 28) {
 
             manager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, alarmTime, operation);
-            manager.setAlarmClock(new AlarmManager.AlarmClockInfo(alarmTime,operation),operation);
+
 
         }  else {
 

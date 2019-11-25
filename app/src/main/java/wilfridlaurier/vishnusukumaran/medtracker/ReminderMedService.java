@@ -2,12 +2,13 @@ package wilfridlaurier.vishnusukumaran.medtracker;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.NotificationChannel;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
+
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
@@ -34,6 +35,7 @@ public class ReminderMedService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationManager manager1=getSystemService(NotificationManager.class);
         Uri uri = intent.getData();
 
         //Display a notification to view the task details
@@ -59,6 +61,10 @@ public class ReminderMedService extends IntentService {
             }
         }
 
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel channel = new NotificationChannel("MyChannelId_01","MyChannel",importance);
+        channel.setDescription(description);
+        manager.createNotificationChannel(channel);
         Notification note = new NotificationCompat.Builder(this,"MyChannelId_01")
                 .setContentTitle(getString(R.string.reminder_title))
                 .setContentText(description)
