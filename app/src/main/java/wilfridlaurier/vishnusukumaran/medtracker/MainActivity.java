@@ -18,6 +18,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.os.AsyncTask;
 
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -27,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     MedCursorAdapter mCursorAdapter;
     MedReminderDbHelper alarmReminderDbHelper = new MedReminderDbHelper(this);
     ListView reminderListView;
-
-
     private static final int LOADER = 0;
 
     @Override
@@ -39,12 +38,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         mToolbar.setTitle(R.string.app_name);
-
-
         reminderListView = (ListView) findViewById(R.id.list);
         View emptyView = findViewById(R.id.empty_view);
         reminderListView.setEmptyView(emptyView);
-
         mCursorAdapter = new MedCursorAdapter(this, null);
         reminderListView.setAdapter(mCursorAdapter);
 
@@ -108,5 +104,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
-    }
+
+
+}
 

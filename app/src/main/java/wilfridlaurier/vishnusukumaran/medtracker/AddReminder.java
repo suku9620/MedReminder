@@ -6,11 +6,13 @@ package wilfridlaurier.vishnusukumaran.medtracker;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.AsyncTask;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.loader.content.CursorLoader;
@@ -475,28 +477,46 @@ public class AddReminder extends AppCompatActivity implements
     }
 
     private void deleteReminder() {
-        if (mCurrentReminderUri != null) {
-            int rowsDeleted = getContentResolver().delete(mCurrentReminderUri, null, null);
-            new MedScheduler().cancelAlarm(getApplicationContext(),mCurrentReminderUri);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
-            notificationManager.deleteNotificationChannel(mTitle);
-            if (rowsDeleted == 0) {
+        int rowsDeleted = getContentResolver().delete(mCurrentReminderUri, null, null);
+        DeleteReminder deleteReminder = new DeleteReminder();
+        deleteReminder.execute();
+        if (rowsDeleted == 0) {
 
-                Toast.makeText(this, getString(R.string.editor_delete_reminder_failed),
-                        Toast.LENGTH_SHORT).show();
-            } else {
+            Toast.makeText(this, getString(R.string.editor_delete_reminder_failed),
+                    Toast.LENGTH_SHORT).show();
+
+        } else {
 
 
-                Toast.makeText(this, getString(R.string.editor_delete_reminder_successful),
-                        Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.editor_delete_reminder_successful),
+                    Toast.LENGTH_SHORT).show();
 
-            }
         }
 
 
         finish();
     }
+    private class DeleteReminder extends AsyncTask<String, Integer, String> {
 
+
+        @Override
+        protected String doInBackground(String... strings) {
+            if (mCurrentReminderUri != null) {
+
+                new MedScheduler().cancelAlarm(getApplicationContext(),mCurrentReminderUri);
+                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                notificationManager.deleteNotificationChannel(mTitle);
+
+
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
 
     public void saveReminder(){
 

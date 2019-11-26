@@ -42,8 +42,15 @@
                 android:layout_centerInParent="true"
                 android:padding="16dp"
                 android:gravity="center"
-                android:textColor="@color/abc_primary_text_material_dark"
+                android:textColor="@color/text_font"
                 android:text="@string/no_card_details"/>
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="333dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"></ProgressBar>
+
         </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

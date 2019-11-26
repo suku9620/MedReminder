@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Medicine Reminder</string>
+    <string name="app_name">MedTracker</string>
     <string name="no_card_details">Click on the button below to begin creating reminders!</string>
     <string name="title_activity_add_reminder">Add Medicine</string>
     <string name="title_activity_edit_reminder">Edit Medicine</string>
     <string name="title_activity_licenses">Licenses</string>
 
-    <string name="add_reminder">Medicine</string>
+    <string name="add_reminder">Enter Reminder here</string>
     <string name="details">Details</string>
     <string name="date">Date</string>
     <string name="time">Time</string>

@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Medizin-Erinnerung</string>
+    <string name="app_name">MedTracker</string>
     <string name="no_card_details">Klicken Sie auf die Schaltfläche unten, um mit der Erstellung Ihres Arzneimittels zu beginnen!</string>
     <string name="title_activity_add_reminder">Medizin hinzufügen</string>
     <string name="title_activity_edit_reminder">Medizin bearbeiten </string>
     <string name="title_activity_licenses">Lizenzen</string>
 
-    <string name="add_reminder">Medizin</string>
+    <string name="add_reminder">Erinnerung hier eingeben</string>
     <string name="details">Einzelheiten</string>
     <string name="date">Datum</string>
     <string name="time">Zeit</string>
