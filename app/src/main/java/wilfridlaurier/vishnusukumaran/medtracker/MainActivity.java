@@ -18,8 +18,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.os.AsyncTask;
-
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 

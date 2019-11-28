@@ -1,3 +1,9 @@
+
+// MedTracker project
+// Author: Vishnu Sukumaran - Wilfrid Laurier University
+// Set of functions to schedule alarm
+
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 import android.app.AlarmManager;
 import android.app.PendingIntent;

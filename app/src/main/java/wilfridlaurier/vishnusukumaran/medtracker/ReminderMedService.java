@@ -1,3 +1,9 @@
+
+// MedTracker project
+// Author: Vishnu Sukumaran - Wilfrid Laurier University
+// Service class for maintaining service of reminding user about the alarm
+
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 import android.app.IntentService;
 import android.app.Notification;
@@ -11,7 +17,6 @@ import android.net.Uri;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.widget.Toast;
-
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 

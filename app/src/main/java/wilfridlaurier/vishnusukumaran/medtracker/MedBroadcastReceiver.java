@@ -1,3 +1,9 @@
+
+// MedTracker project
+// Author: Vishnu Sukumaran - Wilfrid Laurier University
+// Reciever class to accept alert/vibration
+
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 
 import android.app.PendingIntent;
