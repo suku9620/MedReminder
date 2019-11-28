@@ -8,6 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.widget.Toast;
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.TaskStackBuilder;
 
@@ -33,7 +37,7 @@ public class ReminderMedService extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        NotificationManager manager1=getSystemService(NotificationManager.class);
+
         Uri uri = intent.getData();
 
         Intent action = new Intent(this, AddReminder.class);
@@ -71,7 +75,9 @@ public class ReminderMedService extends IntentService {
                 .build();
 
             manager.notify(NOTIFICATION_ID, note);
-
+        Toast.makeText(this, "Check MedTracker for Medicine!!!", Toast.LENGTH_SHORT).show();
+        Vibrator vibrator=(Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(VibrationEffect.createOneShot(1000,VibrationEffect.DEFAULT_AMPLITUDE));
 
     }
 }

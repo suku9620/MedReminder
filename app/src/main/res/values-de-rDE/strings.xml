@@ -14,7 +14,8 @@
     <string name="repeat_no">Wiederholungsintervall </string>
     <string name="repeat_type">Art der Wiederholungen</string>
     <string name="about_msg">Version 1.0 Vishnu Sukumaran</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="about">Über</string>
     <string name="action_discard_reminder">Medizin verwerfen</string>
     <string name="action_save_reminder">Rette die Medizin</string>
@@ -43,4 +44,9 @@
     <string name="editor_update_reminder_failed">Fehler beim Aktualisieren des Arzneimittels</string>
 
     <string name="reminder_title">Medizin-Erinnerung</string>
+    <string name="section_format">Page %1$d</string>
+    <string name="title_activity_med_pager">MedPagerActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
 </resources>

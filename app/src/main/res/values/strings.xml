@@ -17,7 +17,8 @@
     <string name="about_msg">Version 1.0 Vishnu Sukumaran</string>
     <string name="action_discard_reminder">Discard Medicine</string>
     <string name="action_save_reminder">Save Medicine</string>
-
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="editor_activity_title_new_reminder">Add Medicine Details</string>
     <string name="editor_activity_title_edit_reminder">Edit Medicine</string>
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
@@ -42,4 +43,9 @@
     <string name="editor_update_reminder_failed">Error with updating medicine</string>
 
     <string name="reminder_title">MedicineReminder</string>
+    <string name="section_format">Page %1$d</string>
+    <string name="title_activity_med_pager">MedPagerActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+
 </resources>
