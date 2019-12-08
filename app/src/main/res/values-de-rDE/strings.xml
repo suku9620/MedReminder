@@ -48,9 +48,23 @@
     <string name="title_activity_med_pager">MedPagerActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="text_on">Auf</string>
+    <string name="text_off">Aus</string>
 
-    <string name="slider1">Welcome to MedTracker</string>
-<string name="slider2">Place where you put medicine reminders</string>
-<string name="slider3">Reminders can have date, time and number of repetitions. Lets get started!</string>
+    <string name="date_description">Drücken Sie, um das Datum einzustellen</string>
+    <string name="time_description">Drücken Sie, um die Uhrzeit einzustellen</string>
+    <string name="Repeat_description">Wählen Sie, um die Wiederholung einzustellen</string>
+    <string name="interval_description">Drücken Sie, um das Intervall einzustellen</string>
+    <string name="type_description">Drücken Sie, um den Typ einzustellen</string>
+
+    <string name="text_1">Jeden </string>
+    <string name="text_2">(s)</string>
+    <string name="text_space"> </string>
+    <string name="time_string">Every %1$s %2$s (s)</string>
+
+
+    <string name="slider1">Willkommen bei MedTracker</string>
+    <string name="slider2">Platzieren Sie die Medikamenten-Erinnerungen</string>
+    <string name="slider3">Erinnerungen können Datum, Uhrzeit und Anzahl der Wiederholungen enthalten. Lass uns anfangen!</string>
 
 </resources>

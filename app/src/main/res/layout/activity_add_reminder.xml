@@ -35,6 +35,7 @@
             android:hint="@string/add_reminder"
             android:textSize="25sp"
             android:lines="4"
+            android:autofillHints="@string/add_reminder"
             android:minLines="4"
             android:gravity="top|start"
             android:textColor="@android:color/white"
@@ -84,7 +85,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"
-                    android:src="@drawable/ic_view_day_grey600_24dp" />
+                    android:src="@drawable/ic_view_day_grey600_24dp"
+                    android:contentDescription="@string/date_description"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -128,7 +130,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"
-                    android:src="@drawable/ic_access_time_grey600_24dp" />
+                    android:src="@drawable/ic_access_time_grey600_24dp"
+                    android:contentDescription="@string/time_description"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -169,7 +172,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"
-                    android:src="@drawable/ic_sync_grey600_24dp" />
+                    android:src="@drawable/ic_sync_grey600_24dp"
+                    android:contentDescription="@string/Repeat_description"/>
 
                 <LinearLayout
                     android:id="@+id/repeat_ll"
@@ -206,8 +210,8 @@
                     android:layout_marginEnd="16dp"
                     android:checked="true"
                     android:onClick="onSwitchRepeat"
-                    android:textOff="Off"
-                    android:textOn="On" />
+                    android:textOff="@string/text_off"
+                    android:textOn="@string/text_on" />
 
             </RelativeLayout>
 
@@ -227,7 +231,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"
-                    android:src="@drawable/ic_unfold_more_grey600_24dp" />
+                    android:src="@drawable/ic_unfold_more_grey600_24dp"
+                    android:contentDescription="@string/interval_description"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -271,7 +276,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="32dp"
-                    android:src="@drawable/ic_subject_grey600_24dp" />
+                    android:src="@drawable/ic_subject_grey600_24dp"
+                    android:contentDescription="@string/type_description"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"

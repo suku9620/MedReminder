@@ -47,6 +47,20 @@
     <string name="title_activity_med_pager">MedPagerActivity</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
+    <string name="text_on">On</string>
+    <string name="text_off">Off</string>
+
+    <string name="date_description">Press to set the Date</string>
+    <string name="time_description">Press to set the time</string>
+    <string name="Repeat_description">Choose to set the repetition</string>
+    <string name="interval_description">Press to set the interval</string>
+    <string name="type_description">Press to set the type</string>
+
+    <string name="text_1">Every </string>
+    <string name="text_2">(s)</string>
+    <string name="text_space"> </string>
+    <string name="time_string">Every %1$s %2$s (s)</string>
+
 
     <string name="slider1">Welcome to MedTracker</string>
     <string name="slider2">Place where you put medicine reminders</string>

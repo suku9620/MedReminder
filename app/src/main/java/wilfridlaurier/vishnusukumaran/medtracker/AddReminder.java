@@ -1,8 +1,11 @@
 
-// MedTracker project
-// Author: Vishnu Sukumaran - Wilfrid Laurier University
-// Add Medicine Reminder form
+ //MedTracker project
+ //Author: Vishnu Sukumaran - Wilfrid Laurier University
+ //Add Medicine Reminder form that helps use
+ //
+
 package wilfridlaurier.vishnusukumaran.medtracker;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -37,7 +40,8 @@ import java.util.Calendar;
 import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import java.text.DateFormat;
-import android.app.Notification;
+import java.util.Objects;
+
 import android.app.NotificationManager;
 
 public class AddReminder extends AppCompatActivity implements
@@ -45,7 +49,6 @@ public class AddReminder extends AppCompatActivity implements
 
 
     private static final int EXISTING_LOADER = 0;
-    private Toolbar mToolbar;
     private EditText mTitleText;
     private TextView mDateText, mTimeText, mRepeatText, mRepeatNoText, mRepeatTypeText;
     private FloatingActionButton mFAB1;
@@ -89,6 +92,8 @@ public class AddReminder extends AppCompatActivity implements
         }
     };
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +116,7 @@ public class AddReminder extends AppCompatActivity implements
 
 
 
-        mToolbar =  findViewById(R.id.toolbar);
+        Toolbar mToolbar =  findViewById(R.id.toolbar);
         mTitleText =  findViewById(R.id.reminder_title);
         mDateText =  findViewById(R.id.set_date);
         mTimeText =  findViewById(R.id.set_time);
@@ -155,7 +160,7 @@ public class AddReminder extends AppCompatActivity implements
         mTimeText.setText(mTime);
         mRepeatNoText.setText(mRepeatNo);
         mRepeatTypeText.setText(mRepeatType);
-        mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+        mRepeatText.setText(getString(R.string.time_string,mRepeatNo,mRepeatType));
 
         // To save state on device rotation
         if (savedInstanceState != null) {
@@ -187,6 +192,7 @@ public class AddReminder extends AppCompatActivity implements
         }
 
 
+        assert mActive != null;
         if (mActive.equals("false")) {
             mFAB1.show();
             mFAB2.hide();
@@ -199,18 +205,18 @@ public class AddReminder extends AppCompatActivity implements
         setSupportActionBar(mToolbar);
         if(mCurrentReminderUri==null)
         {
-            getSupportActionBar().setTitle(R.string.editor_activity_title_new_reminder);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.editor_activity_title_new_reminder);
         }
         else
         {
-            getSupportActionBar().setTitle(R.string.editor_activity_title_edit_reminder);
+            Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.editor_activity_title_edit_reminder);
         }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
-    protected void onSaveInstanceState (Bundle outState) {
+    protected void onSaveInstanceState (@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
         outState.putCharSequence(KEY_TITLE, mTitleText.getText());
@@ -283,18 +289,18 @@ public class AddReminder extends AppCompatActivity implements
 
 
     public void selectFab1(View v) {
-        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
+        mFAB1 = findViewById(R.id.starred1);
         mFAB1.hide();
-        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
+        mFAB2 =  findViewById(R.id.starred2);
         mFAB2.show();
         mActive = "true";
     }
 
 
     public void selectFab2(View v) {
-        mFAB2 = (FloatingActionButton) findViewById(R.id.starred2);
+        mFAB2 =  findViewById(R.id.starred2);
         mFAB2.hide();
-        mFAB1 = (FloatingActionButton) findViewById(R.id.starred1);
+        mFAB1 =  findViewById(R.id.starred1);
         mFAB1.show();
         mActive = "false";
     }
@@ -304,7 +310,8 @@ public class AddReminder extends AppCompatActivity implements
         boolean on = ((Switch) view).isChecked();
         if (on) {
             mRepeat = "true";
-            mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+
+            mRepeatText.setText(getString(R.string.time_string,mRepeatNo,mRepeatType));
         } else {
             mRepeat = "false";
             mRepeatText.setText(R.string.repeat_off);
@@ -330,7 +337,8 @@ public class AddReminder extends AppCompatActivity implements
 
                 mRepeatType = items[item];
                 mRepeatTypeText.setText(mRepeatType);
-                mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+
+                mRepeatText.setText(getString(R.string.time_string,mRepeatNo,mRepeatType));
             }
         });
         AlertDialog alert = builder.create();
@@ -352,12 +360,14 @@ public class AddReminder extends AppCompatActivity implements
                         if (input.getText().toString().length() == 0) {
                             mRepeatNo = Integer.toString(1);
                             mRepeatNoText.setText(mRepeatNo);
-                            mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+
+                            mRepeatText.setText(getString(R.string.time_string,mRepeatNo,mRepeatType));
                         }
                         else {
                             mRepeatNo = input.getText().toString().trim();
                             mRepeatNoText.setText(mRepeatNo);
-                            mRepeatText.setText("Every " + mRepeatNo + " " + mRepeatType + "(s)");
+
+                            mRepeatText.setText(getString(R.string.time_string,mRepeatNo,mRepeatType));
                         }
                     }
                 });
@@ -505,8 +515,8 @@ public class AddReminder extends AppCompatActivity implements
 
                 new MedScheduler().cancelAlarm(getApplicationContext(),mCurrentReminderUri);
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                assert notificationManager != null;
                 notificationManager.deleteNotificationChannel(mTitle);
-
 
             }
 
@@ -517,6 +527,8 @@ public class AddReminder extends AppCompatActivity implements
             super.onPostExecute(s);
         }
     }
+
+
 
     public void saveReminder(){
 
@@ -545,16 +557,22 @@ public class AddReminder extends AppCompatActivity implements
         long selectedTimestamp =  mCalendar.getTimeInMillis();
 
 
-        if (mRepeatType.equals("Minute")) {
-            mRepeatTime = Integer.parseInt(mRepeatNo) * milMinute;
-        } else if (mRepeatType.equals("Hour")) {
-            mRepeatTime = Integer.parseInt(mRepeatNo) * milHour;
-        } else if (mRepeatType.equals("Day")) {
-            mRepeatTime = Integer.parseInt(mRepeatNo) * milDay;
-        } else if (mRepeatType.equals("Week")) {
-            mRepeatTime = Integer.parseInt(mRepeatNo) * milWeek;
-        } else if (mRepeatType.equals("Month")) {
-            mRepeatTime = Integer.parseInt(mRepeatNo) * milMonth;
+        switch (mRepeatType) {
+            case "Minute":
+                mRepeatTime = Integer.parseInt(mRepeatNo) * milMinute;
+                break;
+            case "Hour":
+                mRepeatTime = Integer.parseInt(mRepeatNo) * milHour;
+                break;
+            case "Day":
+                mRepeatTime = Integer.parseInt(mRepeatNo) * milDay;
+                break;
+            case "Week":
+                mRepeatTime = Integer.parseInt(mRepeatNo) * milWeek;
+                break;
+            case "Month":
+                mRepeatTime = Integer.parseInt(mRepeatNo) * milMonth;
+                break;
         }
 
         if (mCurrentReminderUri == null) {
@@ -608,6 +626,7 @@ public class AddReminder extends AppCompatActivity implements
 
 
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
 
@@ -632,7 +651,7 @@ public class AddReminder extends AppCompatActivity implements
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         if (cursor == null || cursor.getCount() < 1) {
             return;
         }
@@ -662,7 +681,8 @@ public class AddReminder extends AppCompatActivity implements
             mTimeText.setText(time);
             mRepeatNoText.setText(repeatNo);
             mRepeatTypeText.setText(repeatType);
-            mRepeatText.setText("Every " + repeatNo + " " + repeatType + "(s)");
+
+            mRepeatText.setText(getString(R.string.time_string,mRepeatNo,mRepeatType));
            
            
             if (repeat.equals("false")) {
@@ -679,7 +699,7 @@ public class AddReminder extends AppCompatActivity implements
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
 
     }
 
