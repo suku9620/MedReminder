@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor customer
+
+rectangle MedTracker {
+  customer -- (Create Reminder)
+  customer -- (View Reminder)
+  customer -- (Update Reminder)
+  customer -- (Delete Reminder)
+  (Create Reminder) .> (Update Notification/Alarm) : include
+  (Update Reminder) .> (Update Notification/Alarm) : include
+   (Update Reminder) .> (Remove Notification/Alarm) : include
+
+
+}
+
+@enduml
