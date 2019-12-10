@@ -133,7 +133,8 @@ title __MedTracker Class Diagram__\n
             #readSharedSetting()
             #saveSharedSetting()
                                                                      }
-                                    }
+                          }
+
 
   package wilfridlaurier.vishnusukumaran.medtracker {
     class MainActivity {
@@ -145,6 +146,37 @@ title __MedTracker Class Diagram__\n
 
     }
   }
+  package wilfridlaurier.vishnusukumaran.medtracker {
+      class SectionsPagerAdapter {
+      #SectionsPagerAdapter()
+      +getItem()
+      +getCount()
+      +getPageTitle()
+
+
+      }
+    }
+
+    package wilfridlaurier.vishnusukumaran.medtracker {
+         class PlaceholderFragment {
+         +onCreateView()
+         +newInstance()
+         -ARG_SECTION_NUMBER
+
+
+         }
+       }
+
+    package wilfridlaurier.vishnusukumaran.medtracker {
+             class PageViewModel {
+             -mIndex :MutableLiveData
+             -mText:LiveData
+             +setIndex()
+             +getText()
+
+
+             }
+           }
   MedBroadcastReciever -up-|> BroadcastReciever
   
   MedReminderProvider -up-|> ContentProvider
@@ -156,6 +188,10 @@ title __MedTracker Class Diagram__\n
   DeleteReminder -up-|> AsyncTask:<String,Integer,String>
    AlarmReminderEntry o-- BaseColumns
   ReminderMedService -up-|> IntentService
+  SectionsPagerAdapter -up-|> FragmentPagerAdapter
+  PlaceholderFragment -up-|> Fragment
+
+   PageViewModel -up-|> ViewModel
 
   MainActivity o-- LoaderManager.LoaderCallbacks : <cursor>
   MainActivity -up-|> AppCompatActivity
