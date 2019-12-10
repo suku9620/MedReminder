@@ -1,0 +1,168 @@
+
+@startuml
+
+title __MedTracker Class Diagram__\n
+
+  package wilfridlaurier.vishnusukumaran.medtracker {
+    class AddReminder {
+    #onCreate()
+    #onSaveInstanceState()
+    +setTime()
+    +setDate()
+    +selectFab1()
+    +selectFab2()
+    +onSwitchRepeat()
+    +selectRepeatType()
+    +setRepeatNo()
+    +onCreateOptionsMenu()
+    +onPrepareOptionsMenu()
+    +onOptionsItemSelected()
+    -showUnsavedChangesDialog()
+    -showDeleteConfirmationDialog()
+    -deleteReminder()
+    +saveReminder()
+    +onBackPressed()
+    +onCreateLoader()
+    +onLoadFinished()
+    +onLoaderReset()
+    }
+  }
+    package wilfridlaurier.vishnusukumaran.medtracker {
+      class DeleteReminder {
+      #doInBackground()
+      #onPostExecute()
+
+      }
+    }
+  
+
+  package wilfridlaurier.vishnusukumaran.medtracker {
+    class MedBroadcastReciever {
+    +onRecieve()
+
+    }
+  }
+  
+
+  package wilfridlaurier.vishnusukumaran.medtracker {
+    class MedCursorAdaptor {
+    + MedCursorAdapter()
+      +bindView()
+        +setReminderTitle()
+        +setReminderDateTime()
+        +setReminderRepeatInfo()
+        +setActiveImage()
+
+    }
+  }
+  
+
+  package wilfridlaurier.vishnusukumaran.medtracker {
+    class MedManagerProvider {
+    +getAlarmManager()
+    }
+  }
+  package wilfridlaurier.vishnusukumaran.medtracker {
+      class MedPagerActivity {
+      #onCreate()
+      +updateIndicators()
+      +onCreateOptionsMenu()
+      }
+    }
+     package wilfridlaurier.vishnusukumaran.medtracker {
+          class MedReminderContract {
+          +String CONTENT_AUTHORITY
+          +Uri BASE_CONTENT_URI
+          +String PATH_VEHICLE
+          }
+        }
+     package wilfridlaurier.vishnusukumaran.medtracker {
+                  class AlarmReminderEntry {
+                  + Uri CONTENT_URI
+                   +String CONTENT_LIST_TYPE
+                   +String CONTENT_ITEM_TYPE
+                   +String TABLE_NAME
+                  +String _ID
+                     +String KEY_TITLE
+                    +String KEY_DATE
+                     +String KEY_TIME
+                  +String KEY_REPEAT
+                    +String KEY_REPEAT_NO
+                   +String KEY_REPEAT_TYPE
+                	+String KEY_ACTIVE
+
+
+                  }
+                }
+
+  package wilfridlaurier.vishnusukumaran.medtracker {
+            class MedReminderDbHelper {
+            +MedReminderDbHelper()
+            +onCreate()
+            +onUpgrade()
+            }
+          }
+   package wilfridlaurier.vishnusukumaran.medtracker {
+       class MedReminderProvider{
+       +onCreate()
+       +query()
+       +getType()
+       +insert()
+       -insertReminder()
+       +delete()
+       +update()
+       -updateReminder()
+                      }
+                    }
+    package wilfridlaurier.vishnusukumaran.medtracker {
+     class MedScheduler{
+     +setAlarm()
+     +setRepeatAlarm()
+     +cancelAlarm()
+                                          }
+         }
+         package wilfridlaurier.vishnusukumaran.medtracker {
+              class ReminderMedService{
+              +getReminderPendingIntent()
+              +ReminderMedService()
+              #onHandleIntent()
+                                                   }
+                  }
+        package wilfridlaurier.vishnusukumaran.medtracker {
+            class Utils{
+            #readSharedSetting()
+            #saveSharedSetting()
+                                                                     }
+                                    }
+
+  package wilfridlaurier.vishnusukumaran.medtracker {
+    class MainActivity {
+    #onCreate()
+    +onCreateLoader()
+    +onLoadFinished()
+    +onLoaderReset()
+    
+
+    }
+  }
+  MedBroadcastReciever -up-|> BroadcastReciever
+  
+  MedReminderProvider -up-|> ContentProvider
+  MedPagerActivity -up-|> AppCompatActivity
+  MedReminderDbHelper -up-|> SQLiteOpenHelper
+  MedCursorAdaptor -up-|> CursorAdapter
+  MedReminderContract *-- AlarmReminderEntry
+  AddReminder *-- DeleteReminder
+  DeleteReminder -up-|> AsyncTask:<String,Integer,String>
+   AlarmReminderEntry o-- BaseColumns
+  ReminderMedService -up-|> IntentService
+
+  MainActivity o-- LoaderManager.LoaderCallbacks : <cursor>
+  MainActivity -up-|> AppCompatActivity
+  AddReminder o-- LoaderManager.LoaderCallbacks: <cursor>
+  AddReminder -up-|> AppCompatActivity
+
+
+
+
+@enduml

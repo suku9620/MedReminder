@@ -62,6 +62,8 @@
     <string name="text_space"> </string>
     <string name="time_string">Every %1$s %2$s (s)</string>
 
+    <string name="Notification_msg">Überprüfen Sie MedTracker für Medizin !!!</string>
+
 
     <string name="slider1">Willkommen bei MedTracker</string>
     <string name="slider2">Platzieren Sie die Medikamenten-Erinnerungen</string>

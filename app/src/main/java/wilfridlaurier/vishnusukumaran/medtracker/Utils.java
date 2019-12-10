@@ -6,7 +6,7 @@ package wilfridlaurier.vishnusukumaran.medtracker;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class Utils {
+ public class Utils {
 
     private static final String PREFERENCES_FILE = "materialsample_settings";
 

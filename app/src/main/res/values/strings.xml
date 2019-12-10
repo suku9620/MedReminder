@@ -61,6 +61,8 @@
     <string name="text_space"> </string>
     <string name="time_string">Every %1$s %2$s (s)</string>
 
+    <string name="Notification_msg">Check MedTracker for Medicine!!!</string>
+
 
     <string name="slider1">Welcome to MedTracker</string>
     <string name="slider2">Place where you put medicine reminders</string>

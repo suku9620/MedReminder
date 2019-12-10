@@ -28,6 +28,13 @@ public class ReminderMedService extends IntentService {
 
     Cursor cursor;
 
+    /**
+     * Set the data in the pending intent
+     * @param context context for performing the action
+     * @param uri data
+     * @return return the intent
+     */
+
     public static PendingIntent getReminderPendingIntent(Context context, Uri uri) {
         Intent action = new Intent(context, ReminderMedService.class);
         action.setData(uri);
@@ -37,6 +44,11 @@ public class ReminderMedService extends IntentService {
     public ReminderMedService() {
         super(TAG);
     }
+
+    /**
+     * Notification or Vibration is performed using onHandleIntent function
+     * @param intent Intent is used to pull the information and set on Notification
+     */
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -70,6 +82,7 @@ public class ReminderMedService extends IntentService {
         int importance = NotificationManager.IMPORTANCE_DEFAULT;
         NotificationChannel channel = new NotificationChannel(description,"MyChannel",importance);
         channel.setDescription(description);
+        assert manager != null;
         manager.createNotificationChannel(channel);
         Notification note = new NotificationCompat.Builder(this,description)
                 .setContentTitle(getString(R.string.reminder_title))
@@ -80,8 +93,9 @@ public class ReminderMedService extends IntentService {
                 .build();
 
             manager.notify(NOTIFICATION_ID, note);
-        Toast.makeText(this, "Check MedTracker for Medicine!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.Notification_msg, Toast.LENGTH_SHORT).show();
         Vibrator vibrator=(Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+        assert vibrator != null;
         vibrator.vibrate(VibrationEffect.createOneShot(1000,VibrationEffect.DEFAULT_AMPLITUDE));
 
     }
