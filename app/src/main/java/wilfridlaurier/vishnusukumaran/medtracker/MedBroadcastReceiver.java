@@ -16,9 +16,14 @@ import android.widget.Toast;
 import androidx.core.app.NotificationCompat;
 
 public class MedBroadcastReceiver extends BroadcastReceiver {
+    /**
+     * On receive function for notification
+     * @param context context
+     * @param intent intent
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context, "Check MedTracker for Medicine!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, context.getResources().getString(R.string.checkmed), Toast.LENGTH_SHORT).show();
         Vibrator vibrator=(Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(VibrationEffect.createOneShot(1000,VibrationEffect.DEFAULT_AMPLITUDE));
 

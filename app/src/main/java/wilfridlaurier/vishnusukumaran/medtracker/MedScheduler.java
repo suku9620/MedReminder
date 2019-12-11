@@ -14,6 +14,12 @@ import android.os.Build;
 
 
 public class MedScheduler {
+    /**
+     * Function to setting an alarm for one time
+     * @param context context
+     * @param alarmTime alarmTime
+     * @param reminderTask reminderTask
+     */
     public void setAlarm(Context context, long alarmTime, Uri reminderTask) {
         AlarmManager manager = MedManagerProvider.getAlarmManager(context);
 
@@ -36,6 +42,13 @@ public class MedScheduler {
         }
     }
 
+    /**
+     * Function to Repeating alarms
+     * @param context context
+     * @param alarmTime alarmTime
+     * @param reminderTask reminderTask
+     * @param RepeatTime RepeatTime
+     */
     public void setRepeatAlarm(Context context, long alarmTime, Uri reminderTask, long RepeatTime) {
         AlarmManager manager = MedManagerProvider.getAlarmManager(context);
         Intent intent= new Intent(context, MedBroadcastReceiver.class);
@@ -48,6 +61,11 @@ public class MedScheduler {
 
     }
 
+    /**
+     * Function to cancel the alarm
+     * @param context context
+     * @param reminderTask reminderTask
+     */
     public void cancelAlarm(Context context, Uri reminderTask) {
         AlarmManager manager = MedManagerProvider.getAlarmManager(context);
         Intent intent= new Intent(context, MedBroadcastReceiver.class);

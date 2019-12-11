@@ -1,3 +1,8 @@
+//MedTracker project
+//Author: Vishnu Sukumaran - Wilfrid Laurier University
+//SQL helper class to perform database interactions
+//
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,6 +18,10 @@ public class MedReminderDbHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Function to create new database and form a table
+     * @param sqLiteDatabase database
+     */
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 

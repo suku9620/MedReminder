@@ -1,3 +1,8 @@
+//MedTracker project
+//Author: Vishnu Sukumaran - Wilfrid Laurier University
+// URI class to identify records or resources
+//
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 
 import android.content.ContentProvider;
@@ -38,6 +43,15 @@ public class MedReminderProvider extends ContentProvider {
         return true;
     }
 
+    /**
+     * Function to query
+     * @param uri uri
+     * @param projection projection
+     * @param selection selection
+     * @param selectionArgs selectionArgs
+     * @param sortOrder sortOrder
+     * @return return
+     */
     @Nullable
     @Override
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs,
@@ -67,6 +81,11 @@ public class MedReminderProvider extends ContentProvider {
         return cursor;
     }
 
+    /**
+     * Function that returns content type
+     * @param uri uri
+     * @return return
+     */
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
@@ -81,6 +100,13 @@ public class MedReminderProvider extends ContentProvider {
         }
     }
 
+
+    /**
+     * Function to insert the record
+     * @param uri uri
+     * @param contentValues contentValues
+     * @return return
+     */
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
@@ -94,6 +120,12 @@ public class MedReminderProvider extends ContentProvider {
         }
     }
 
+    /**
+     * Function to insert the reminder
+     * @param uri uri
+     * @param values values
+     * @return return
+     */
     private Uri insertReminder(Uri uri, ContentValues values) {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -110,7 +142,13 @@ public class MedReminderProvider extends ContentProvider {
         return ContentUris.withAppendedId(uri, id);
     }
 
-
+    /**
+     * Function to delete the record
+     * @param uri uri
+     * @param selection selection
+     * @param selectionArgs selectionArgs
+     * @return return
+     */
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
 
@@ -139,6 +177,14 @@ public class MedReminderProvider extends ContentProvider {
         return rowsDeleted;
     }
 
+    /**
+     * Function to get data and pass to updatereminder()
+     * @param uri uri
+     * @param contentValues contentValues
+     * @param selection selection
+     * @param selectionArgs selectionArgs
+     * @return return
+     */
     @Override
     public int update(Uri uri, ContentValues contentValues, String selection,
                       String[] selectionArgs) {
@@ -155,6 +201,14 @@ public class MedReminderProvider extends ContentProvider {
         }
     }
 
+    /**
+     * Function to update the reminders
+     * @param uri uri
+     * @param values values
+     * @param selection selection
+     * @param selectionArgs selectionArgs
+     * @return return
+     */
     private int updateReminder(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 
         if (values.size() == 0) {

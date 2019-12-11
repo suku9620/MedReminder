@@ -1,3 +1,9 @@
+//MedTracker project
+//Author: Vishnu Sukumaran - Wilfrid Laurier University
+//Base class for MedTracker
+//
+
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 import android.content.ContentResolver;
 import android.database.Cursor;

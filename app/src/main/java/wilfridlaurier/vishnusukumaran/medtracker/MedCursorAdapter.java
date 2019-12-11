@@ -1,3 +1,8 @@
+//MedTracker project
+//Author: Vishnu Sukumaran - Wilfrid Laurier University
+//Custom Cursor adapter class
+//
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 import android.content.Context;
 import android.database.Cursor;
@@ -25,6 +30,12 @@ public class MedCursorAdapter extends CursorAdapter {
         return LayoutInflater.from(context).inflate(R.layout.alarm_items, parent, false);
     }
 
+    /**
+     * Bind an existing view to the cursor
+     * @param view view
+     * @param context context
+     * @param cursor cursor
+     */
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
@@ -63,7 +74,10 @@ public class MedCursorAdapter extends CursorAdapter {
 
     }
 
-
+    /**
+     * Function to set the design of items in the main page
+     * @param title title
+     */
     public void setReminderTitle(String title) {
         mTitleText.setText(title);
         String letter = "A";
@@ -74,18 +88,25 @@ public class MedCursorAdapter extends CursorAdapter {
 
         int color = mColorGenerator.getRandomColor();
 
-
         mDrawableBuilder = TextDrawable.builder()
                 .buildRound(letter, color);
         mThumbnailImage.setImageDrawable(mDrawableBuilder);
     }
 
-
+    /**
+     * Function set the reminder date
+     * @param datetime datetime
+     */
     public void setReminderDateTime(String datetime) {
         mDateAndTimeText.setText(datetime);
     }
 
-
+    /**
+     * Function to set the repetition information
+     * @param repeat checkbox
+     * @param repeatNo number
+     * @param repeatType type of repetition
+     */
     public void setReminderRepeatInfo(String repeat, String repeatNo, String repeatType) {
         if(repeat.equals("true")){
             mRepeatInfoText.setText("Every " + repeatNo + " " + repeatType + "(s)");
@@ -94,6 +115,10 @@ public class MedCursorAdapter extends CursorAdapter {
         }
     }
 
+    /**
+     * Set the active/inactive image
+     * @param active flag
+     */
 
     public void setActiveImage(String active){
         if(active.equals("true")){

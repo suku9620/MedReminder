@@ -1,7 +1,4 @@
-
-
-
- //MedTracker project
+//MedTracker project
  //Author: Vishnu Sukumaran - Wilfrid Laurier University
  //Slider Intro about the tool for first time use
  package wilfridlaurier.vishnusukumaran.medtracker;

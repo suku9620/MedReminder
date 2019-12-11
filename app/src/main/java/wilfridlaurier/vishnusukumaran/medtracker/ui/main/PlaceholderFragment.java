@@ -26,7 +26,7 @@ public  class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     ImageView img;
-    String [] title={"Welcome to MedTracker","Place where you put medicine reminders", "Reminders can have date, time and number of repetitions. Lets get started!"};
+    String [] title={getString(R.string.carouseltext1),getString(R.string.carouseltext2), getString(R.string.carouseltext3)};
     int[] bgs = new int[]{R.mipmap.ic_launcher, R.drawable.ic_access_alarms_black_24dp, R.drawable.ic_vibration_black_24dp};
 
     public PlaceholderFragment() {
@@ -48,10 +48,11 @@ public  class PlaceholderFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_med_pager, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
+        TextView textView =  rootView.findViewById(R.id.section_label);
+        assert getArguments() != null;
         textView.setText(title[ getArguments().getInt(ARG_SECTION_NUMBER)-1]);
 
-        img = (ImageView) rootView.findViewById(R.id.imageView);
+        img =  rootView.findViewById(R.id.imageView);
         img.setBackgroundResource(bgs[getArguments().getInt(ARG_SECTION_NUMBER) - 1]);
 
 

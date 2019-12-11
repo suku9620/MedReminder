@@ -1,9 +1,10 @@
 
 // MedTracker project
 // Author: Vishnu Sukumaran - Wilfrid Laurier University
-// Add Medicine Reminder form
+// Main activity
 
 package wilfridlaurier.vishnusukumaran.medtracker;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.os.Bundle;
@@ -28,16 +29,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     ListView reminderListView;
     private static final int LOADER = 0;
 
+    /**
+     * Oncreate function to load the UI which displays saved reminders by default
+     * @param savedInstanceState bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         mToolbar.setTitle(R.string.app_name);
-        reminderListView = (ListView) findViewById(R.id.list);
+        reminderListView =  findViewById(R.id.list);
         View emptyView = findViewById(R.id.empty_view);
         reminderListView.setEmptyView(emptyView);
         mCursorAdapter = new MedCursorAdapter(this, null);
@@ -54,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        mAddReminderButton = (FloatingActionButton) findViewById(R.id.fab);
+        mAddReminderButton =  findViewById(R.id.fab);
 
         mAddReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +73,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+    /**
+     * Instantiate and return a new Loader for the given ID.
+     * @param i i
+     * @param bundle bundle
+     * @return return
+     */
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         String[] projection = {
@@ -91,14 +103,24 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     }
 
+
+    /**
+     * Called when a previously created loader has finished its load
+     * @param loader loader
+     * @param cursor cursor
+     */
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         mCursorAdapter.swapCursor(cursor);
 
     }
 
+    /**
+     * Called when a previously created loader is being reset, and thus making its data unavailable
+     * @param loader loader
+     */
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mCursorAdapter.swapCursor(null);
 
     }

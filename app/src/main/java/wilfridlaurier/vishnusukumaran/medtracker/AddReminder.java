@@ -41,7 +41,6 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import java.text.DateFormat;
 import java.util.Objects;
-
 import android.app.NotificationManager;
 
 public class AddReminder extends AppCompatActivity implements
@@ -93,7 +92,10 @@ public class AddReminder extends AppCompatActivity implements
     };
 
 
-
+    /**
+     * Oncreate function to load the add record page UI or show the details of the record selected from Main activity
+     * @param savedInstanceState reference Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,6 +217,11 @@ public class AddReminder extends AppCompatActivity implements
        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
+
+    /**
+     * Function to store the state of the object
+     * @param outState bundle
+     */
     @Override
     protected void onSaveInstanceState (@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -228,6 +235,11 @@ public class AddReminder extends AppCompatActivity implements
         outState.putCharSequence(KEY_ACTIVE, mActive);
     }
     Calendar now = Calendar.getInstance();
+
+    /**
+     * To set the time for the record
+     * @param v view
+     */
 
     public void setTime(View v){
 
@@ -259,7 +271,10 @@ public class AddReminder extends AppCompatActivity implements
 
     }
 
-
+    /**
+     * To set the date for the record
+     * @param v view
+     */
     public void setDate(View v){
 
         DatePickerDialog.OnDateSetListener mDateListener = new DatePickerDialog.OnDateSetListener() {
@@ -287,7 +302,10 @@ public class AddReminder extends AppCompatActivity implements
     }
 
 
-
+    /**
+     * Function to show the reminder is active
+     * @param v view
+     */
     public void selectFab1(View v) {
         mFAB1 = findViewById(R.id.starred1);
         mFAB1.hide();
@@ -296,6 +314,10 @@ public class AddReminder extends AppCompatActivity implements
         mActive = "true";
     }
 
+    /**
+     * Function to show the record is inactive
+     * @param v view
+     */
 
     public void selectFab2(View v) {
         mFAB2 =  findViewById(R.id.starred2);
@@ -305,7 +327,10 @@ public class AddReminder extends AppCompatActivity implements
         mActive = "false";
     }
 
-
+    /**
+     * Function to mark the repetition checkbox
+     * @param view view
+     */
     public void onSwitchRepeat(View view) {
         boolean on = ((Switch) view).isChecked();
         if (on) {
@@ -318,7 +343,10 @@ public class AddReminder extends AppCompatActivity implements
         }
     }
 
-
+    /**
+     * Function to select the repeat type
+     * @param v view
+     */
     public void selectRepeatType(View v){
         final String[] items = new String[5];
 
@@ -345,7 +373,10 @@ public class AddReminder extends AppCompatActivity implements
         alert.show();
     }
 
-
+    /**
+     * Function to set the repetition number
+     * @param v view
+     */
     public void setRepeatNo(View v){
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle("Enter Number");
@@ -379,12 +410,22 @@ public class AddReminder extends AppCompatActivity implements
         alert.show();
     }
 
+    /**
+     * Function to specify the menu
+     * @param menu menu
+     * @return menu
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add_reminder, menu);
         return true;
     }
 
+    /**
+     * Function to define the menu view
+     * @param menu menu
+     * @return menu
+     */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
@@ -396,6 +437,11 @@ public class AddReminder extends AppCompatActivity implements
         return true;
     }
 
+    /**
+     * Function to specify the actions for each menu item selected
+     * @param item item
+     * @return item
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -447,6 +493,10 @@ public class AddReminder extends AppCompatActivity implements
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Custom dialog to inform user about unsaved changes
+     * @param discardButtonClickListener listener
+     */
     private void showUnsavedChangesDialog(
             DialogInterface.OnClickListener discardButtonClickListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -465,6 +515,9 @@ public class AddReminder extends AppCompatActivity implements
         alertDialog.show();
     }
 
+    /**
+     * Custom dialog for showing delete confirmation
+     */
     private void showDeleteConfirmationDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
@@ -529,7 +582,9 @@ public class AddReminder extends AppCompatActivity implements
     }
 
 
-
+    /**
+     * Function to save a reminder record
+     */
     public void saveReminder(){
 
       /*if (mCurrentReminderUri == null ) {
@@ -624,7 +679,12 @@ public class AddReminder extends AppCompatActivity implements
     }
 
 
-
+    /**
+     * Instantiate and return a new Loader for the given ID.
+     * @param i i
+     * @param bundle bundle
+     * @return return
+     */
 
     @NonNull
     @Override
@@ -650,6 +710,11 @@ public class AddReminder extends AppCompatActivity implements
                 null);
     }
 
+    /**
+     * Called when a previously created loader has finished its load
+     * @param loader loader
+     * @param cursor cursor
+     */
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         if (cursor == null || cursor.getCount() < 1) {
