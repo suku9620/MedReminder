@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import wilfridlaurier.vishnusukumaran.medtracker.ui.main.SectionsPagerAdapter;
-import wilfridlaurier.vishnusukumaran.medtracker.Utils;
 import android.content.Intent;
 
 public class MedPagerActivity extends AppCompatActivity {

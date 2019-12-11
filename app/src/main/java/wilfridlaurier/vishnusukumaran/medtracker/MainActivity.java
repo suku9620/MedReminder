@@ -3,6 +3,11 @@
 // Author: Vishnu Sukumaran - Wilfrid Laurier University
 // Main activity
 
+/********************************************
+ * Code is adapted from a youtube channel Delaroy "Studios"
+ * https://www.youtube.com/channel/UCZ00VgbuL3218mXA0_drptg
+ ********************************************/
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
