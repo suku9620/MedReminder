@@ -1,0 +1,17 @@
+@startuml
+usecase UC01 as "Create Reminder
+--
+Actor:User
+--
+Goal: To create a Reminder
+==
+When a user access the MedTRracker app, the app allows to create
+a Medication Reminder by having a Add/'+' button on the main screen.
+User then gets redirected to the form and allowed to enter information
+to save the new reminder.
+--Conclusion--
+User creates a new Reminder and updates the
+notification channel/puts a vibration reminder
+
+"
+@enduml

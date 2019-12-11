@@ -1,0 +1,14 @@
+@startuml
+usecase UC01 as "View Reminder
+--
+Actor:User
+--
+Goal: To view a Reminder
+==
+When a user access the MedTRracker app, the app allows the user
+to view all the reminders in the main screen.
+--Conclusion--
+Users are able to see new reminders in the main screen
+
+"
+@enduml

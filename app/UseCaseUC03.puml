@@ -1,0 +1,16 @@
+@startuml
+usecase UC01 as "Update Reminder
+--
+Actor:User
+--
+Goal: To update a Reminder
+==
+When a user access the MedTRracker app, the app allows to update
+a reminder by giving an option to select the saved ones and
+then edit the details.
+--Conclusion--
+User updates the reminder and eventually updates the
+notification channel/puts a vibration reminder
+
+"
+@enduml

@@ -1,0 +1,14 @@
+@startuml
+usecase UC01 as "Delete Reminder
+--
+Actor:User
+--
+Goal: To delete a Reminder
+==
+When a user access the MedTRracker app, the app allows the user
+to select a reminder from the main screen and the ability to delete them.
+--Conclusion--
+Users are able to delete reminder reminders
+
+"
+@enduml
