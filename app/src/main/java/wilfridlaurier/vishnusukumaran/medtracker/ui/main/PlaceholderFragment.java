@@ -26,7 +26,7 @@ public  class PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
 
     ImageView img;
-    String [] title={getString(R.string.carouseltext1),getString(R.string.carouseltext2), getString(R.string.carouseltext3)};
+    String [] title={"Welcome to MedTracker","Place where you put medicine reminders", "Reminders can have date, time and number of repetitions. Lets get started!"};
     int[] bgs = new int[]{R.mipmap.ic_launcher, R.drawable.ic_access_alarms_black_24dp, R.drawable.ic_vibration_black_24dp};
 
     public PlaceholderFragment() {

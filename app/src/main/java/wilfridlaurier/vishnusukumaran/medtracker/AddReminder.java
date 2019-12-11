@@ -29,6 +29,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -65,6 +66,7 @@ public class AddReminder extends AppCompatActivity implements
     private String mActive;
     private Uri mCurrentReminderUri;
     private boolean mVehicleHasChanged = false;
+    ProgressBar progressBar;
 
 
     private static final String KEY_TITLE = "title_key";
@@ -128,6 +130,8 @@ public class AddReminder extends AppCompatActivity implements
         mRepeatSwitch =  findViewById(R.id.repeat_switch);
         mFAB1 =  findViewById(R.id.starred1);
         mFAB2 =  findViewById(R.id.starred2);
+        progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         //Initializing with defaults
         mActive = "true";
@@ -560,24 +564,36 @@ public class AddReminder extends AppCompatActivity implements
         finish();
     }
     private class DeleteReminder extends AsyncTask<String, Integer, String> {
-
+        @Override
+        protected  void onPreExecute()
+        {
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         @Override
         protected String doInBackground(String... strings) {
             if (mCurrentReminderUri != null) {
-
+                publishProgress(25);
                 new MedScheduler().cancelAlarm(getApplicationContext(),mCurrentReminderUri);
+                publishProgress(50);
                 NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                 assert notificationManager != null;
+                publishProgress(75);
                 notificationManager.deleteNotificationChannel(mTitle);
+                publishProgress(100);
 
             }
 
             return null;
         }
         @Override
+        protected void onProgressUpdate(Integer... values) {
+            progressBar.setProgress(values[0]);
+        }
+        @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            progressBar.setVisibility(View.INVISIBLE);
         }
     }
 
