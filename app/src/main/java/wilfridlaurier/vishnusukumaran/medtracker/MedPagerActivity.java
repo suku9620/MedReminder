@@ -25,10 +25,8 @@ public class MedPagerActivity extends AppCompatActivity {
         Button mSkipBtn, mFinishBtn;
         ImageView zero, one, two;
         ImageView[] indicators;
-
         CoordinatorLayout mCoordinator;
         Boolean isUserFirstTime;
-
         int page = 0;   //  to track page position
 
     /**

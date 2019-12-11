@@ -10,9 +10,22 @@ rectangle MedTracker {
   customer -- (Delete Reminder)
   (Create Reminder) .> (Update Notification/Alarm) : include
   (Update Reminder) .> (Update Notification/Alarm) : include
-   (Update Reminder) .> (Remove Notification/Alarm) : include
+   (Delete Reminder) .> (Remove Notification/Alarm) : include
+note right of (Create Reminder)
+UseCaseUC01
+end note
 
 
+note right of (View Reminder)
+UseCaseUC02
+end note
+note right of (Update Reminder)
+UseCaseUC03
+end note
+
+note right of (Delete Reminder)
+UseCaseUC04
+end note
 }
 
 @enduml
