@@ -60,16 +60,7 @@
     <string name="text_2">(s)</string>
     <string name="text_space"> </string>
     <string name="time_string">Every %1$s %2$s (s)</string>
-
     <string name="Notification_msg">Check MedTracker for Medicine!!!</string>
-
-
-    <string name="slider1">Welcome to MedTracker</string>
-    <string name="slider2">Place where you put medicine reminders</string>
-    <string name="slider3">Reminders can have date, time and number of repetitions. Lets get started!</string>
-    <string name="carouseltext1">Welcome to MedTracker</string>
-    <string name="carouseltext2">Place where you put medicine reminders</string>
-    <string name="carouseltext3">Reminders can have date, time and number of repetitions. Lets get started!</string>
     <string name="checkmed">Check MedTracker for Medicine!!!</string>
 
 </resources>

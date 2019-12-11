@@ -1,10 +1,15 @@
+
+
 package wilfridlaurier.vishnusukumaran.medtracker;
 
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
-
+//MedTracker project
+//Author: Vishnu Sukumaran - Wilfrid Laurier University
+// Unit testing which includes most of the scenarios in the application
+//
 import androidx.test.espresso.DataInteraction;
 import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;

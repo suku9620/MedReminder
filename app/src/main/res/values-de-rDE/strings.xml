@@ -63,12 +63,6 @@
     <string name="time_string">Every %1$s %2$s (s)</string>
 
     <string name="Notification_msg">Überprüfen Sie MedTracker für Medizin !!!</string>
-
-
-    <string name="slider1">Willkommen bei MedTracker</string>
-    <string name="slider2">Platzieren Sie die Medikamenten-Erinnerungen</string>
-    <string name="slider3">Erinnerungen können Datum, Uhrzeit und Anzahl der Wiederholungen enthalten. Lass uns anfangen!</string>
-
     <string name="checkmed">Überprüfen Sie MedTracker für Medizin!!!</string>
 
 </resources>
